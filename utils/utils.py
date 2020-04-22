@@ -287,7 +287,7 @@ def build_targets(pred_boxes, pred_cls, target, anchors, ignore_thres):
 
     # Convert to position relative to box
     target_boxes = target[:, 2:6] * nG
-    gxy = target_boxes[:, :2]
+    gxy = torch.clamp(target_boxes[:, :2], 0, nG-1e-5)
     gwh = target_boxes[:, 2:]
     # Get anchors with best iou
     ious = torch.stack([bbox_wh_iou(anchor, gwh) for anchor in anchors])

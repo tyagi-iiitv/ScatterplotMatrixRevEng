@@ -118,19 +118,21 @@ if __name__ == "__main__":
                 box_h = y2 - y1
 
                 color = bbox_colors[int(np.where(unique_labels == int(cls_pred))[0])]
+                #if not classes[int(cls_pred)] == "labels":
                 # Create a Rectangle patch
-                bbox = patches.Rectangle((x1, y1), box_w, box_h, linewidth=2, edgecolor=color, facecolor="none")
-                # Add the bbox to the plot
+                bbox = patches.Rectangle((x1, y1), box_w, box_h, linewidth=0.5, edgecolor=color, facecolor="none")
+                  # Add the bbox to the plot
                 ax.add_patch(bbox)
                 # Add label
-                plt.text(
-                    x1,
-                    y1,
-                    s=classes[int(cls_pred)],
-                    color="white",
-                    verticalalignment="top",
-                    bbox={"color": color, "pad": 0},
-                )
+                # plt.text(
+                #     x1,
+                #     y1,
+                #     s=classes[int(cls_pred)],
+                #     color="white",
+                #     verticalalignment="top",
+                #     bbox={"color": color, "pad": 0},
+                #     fontdict = {'size': 5},
+                # )
 
         # Save generated image with detections
         plt.axis("off")
