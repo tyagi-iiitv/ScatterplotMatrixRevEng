@@ -144,10 +144,10 @@ if __name__ == "__main__":
             log_str += f"\n---- ETA {time_left}"
 
             
-
+            print(log_str)
             model.seen += imgs.size(0)
             
-        print(log_str)
+        
         if (epoch+1) % opt.evaluation_interval == 0:
             print("\n---- Evaluating Model ----")
             # Evaluate the model on the validation set
