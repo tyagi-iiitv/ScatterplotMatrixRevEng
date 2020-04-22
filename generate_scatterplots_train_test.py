@@ -160,10 +160,16 @@ def gen_scatterplot(dataset,x_dist_type,y_dist_type,i,x_distribution_param,y_dis
 
   if i<=num_train:
     with open("data/custom/train.txt",'a') as train_list:
-      train_list.write(path+"\n")
+      if i==num_train:
+        train_list.write(path)
+      else:
+        train_list.write(path+"\n")
   else:
     with open("data/custom/valid.txt",'a') as valid_list:
-      valid_list.write(path+"\n") 
+      if i==len(dataset)-1:
+        valid_list.write(path)
+      else:
+        valid_list.write(path+"\n") 
 
   mdata = pd.DataFrame(meta_data.keys())
   mdata['1'] = (meta_data.values())

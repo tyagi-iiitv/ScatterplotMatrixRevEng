@@ -5,7 +5,7 @@ A minimal PyTorch implementation of YOLOv3 for scatterplot matrix reverse engine
 ### Clone
 ```
 !git clone https://github.com/siddhantrele/ScatterplotMatrixRevEng  
-%cd PyTorch-YOLOv3/
+%cd ScatterplotMatrixRevEng/
 ```
 
 ## Train on Custom Dataset
@@ -13,14 +13,14 @@ A minimal PyTorch implementation of YOLOv3 for scatterplot matrix reverse engine
 #### Custom model
 Run the commands below to create a custom model definition, replacing `<num-classes>` with the number of classes in your dataset.
 
-Delete existing config/yolov3-custom.cfg before running below commands.
+If you want to change num_classes (default is 3, points, ticks, labels), delete existing config/yolov3-custom.cfg before running below commands.
 ```
 %cd config/                       # Navigate to config dir                         
 !sh create_custom_model.sh <num-classes> # Will create custom model 'yolov3-custom.cfg'
 ```
 
 #### Classes
-Add class names to `data/custom/classes.names`. This file should have one row per class name.
+Add class names to `data/custom/classes.names`. This file should have one row per class name. Default is already added, points, ticks and labels
 
 #### Image Folder
 To generate training and testing images:
@@ -43,11 +43,15 @@ $ train.py [-h] [--epochs EPOCHS] [--batch_size BATCH_SIZE]
                 [--evaluation_interval EVALUATION_INTERVAL]
                 [--compute_map COMPUTE_MAP]
                 [--multiscale_training MULTISCALE_TRAINING]
+
 ```
 
 To train on the custom dataset run:
 
 ```
+!pip uninstall tensorflow                   # Uninstall TF 2.0
+!pip install tensorflow==1.13.2             # Install compatible TF version
+!pip install -r requirements.txt            # Install required modules
 !python3 train.py --model_def config/yolov3-custom.cfg --data_config config/custom.data
 ```
 
