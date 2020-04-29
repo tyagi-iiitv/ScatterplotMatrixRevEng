@@ -20,7 +20,9 @@ If you want to change num_classes (default is 3, points, ticks, labels), delete 
 ```
 
 #### Classes
-Add class names to `data/custom/classes.names`. This file should have one row per class name. Default is already added, points, ticks and labels
+Add/Change class names in `data/custom/classes.names`. This file should have one row per class name. Default is already added, points, ticks and labels
+
+Add/Change num_classes in `config/custom.data`
 
 #### Image Folder
 To generate training and testing images:
