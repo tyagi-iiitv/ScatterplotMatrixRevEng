@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 No_of_datasets = 2500 # No of total datasets generated, also number of images that will be generated
 total_samples = 30 # No of points in each image
 train_test_ratio = 0.7 # 70% data will be used to train, 20% to test
+class_names = ["points","ticks"] # by default only points and ticks are generated
 
 def gen_data(total_samples, No_of_datasets):
   distribution_param = {}
@@ -211,31 +212,41 @@ def gen_scatterplot(dataset,x_dist_type,y_dist_type,i,x_distribution_param,y_dis
   y_label_coords = get_centre_from_bbox(y_label_bounds[1:-1],height)
 
   with open("data/custom/labels/"+str(i+1)+".txt",'w+') as img_labels:
-    for xp, yp in zip(xpix, ypix):
-      img_labels.write("0"+" "+str(xp/width)+" "+str(yp/height)+" "+str(bounding_box/width)+" "+str(bounding_box/height)+"\n")
+
+    if "points" in class_names:
+      for xp, yp in zip(xpix, ypix):
+        img_labels.write("0"+" "+str(xp/width)+" "+str(yp/height)+" "+str(bounding_box/width)+" "+str(bounding_box/height)+"\n")
     
-    for x_j, y_j in x_tick_pos:
-      img_labels.write("1"+" "+str(x_j/width)+" "+str(y_j/height)+" "+str(tick_box_size/width)+" "+str(tick_box_size/height)+"\n")
+    if "ticks" in class_names:
+      for x_j, y_j in x_tick_pos:
+        img_labels.write("1"+" "+str(x_j/width)+" "+str(y_j/height)+" "+str(tick_box_size/width)+" "+str(tick_box_size/height)+"\n")
 
-    for x_j, y_j in y_tick_pos:
-      img_labels.write("1"+" "+str(x_j/width)+" "+str(y_j/height)+" "+str(tick_box_size/width)+" "+str(tick_box_size/height)+"\n")
+      for x_j, y_j in y_tick_pos:
+        img_labels.write("1"+" "+str(x_j/width)+" "+str(y_j/height)+" "+str(tick_box_size/width)+" "+str(tick_box_size/height)+"\n")
 
-    for item in x_label_coords:
-      centre_x_label = item[0]
-      centre_y_label = item[1]
-      box_width_label = item[2]
-      box_height_label = item[3]
-      img_labels.write("2"+" "+str(centre_x_label/width)+" "+str(centre_y_label/height)+" "+str(box_width_label/width)+" "+str(box_height_label/height)+"\n")
+    if "labels" in class_names:
+      for item in x_label_coords:
+        centre_x_label = item[0]
+        centre_y_label = item[1]
+        box_width_label = item[2]
+        box_height_label = item[3]
+        img_labels.write("2"+" "+str(centre_x_label/width)+" "+str(centre_y_label/height)+" "+str(box_width_label/width)+" "+str(box_height_label/height)+"\n")
 
-    for item in y_label_coords:
-      centre_x_label = item[0]
-      centre_y_label = item[1]
-      box_width_label = item[2]
-      box_height_label = item[3]
-      img_labels.write("2"+" "+str(centre_x_label/width)+" "+str(centre_y_label/height)+" "+str(box_width_label/width)+" "+str(box_height_label/height)+"\n")
+      for item in y_label_coords:
+        centre_x_label = item[0]
+        centre_y_label = item[1]
+        box_width_label = item[2]
+        box_height_label = item[3]
+        img_labels.write("2"+" "+str(centre_x_label/width)+" "+str(centre_y_label/height)+" "+str(box_width_label/width)+" "+str(box_height_label/height)+"\n")
   plt.close(fig)
 
 num_train = round(len(dataset)*train_test_ratio)
+if "points" in class_names:
+  print("points")
+if "ticks" in class_names:
+  print("ticks")
+if "labels" in class_names:
+  print("labels")
 for i,d in enumerate(dataset):
   if i%500 == 0:
     print("Generated "+str(i+1))
