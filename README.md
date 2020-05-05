@@ -1,6 +1,15 @@
 # PyTorch-YOLOv3
 A minimal PyTorch implementation of YOLOv3 for scatterplot matrix reverse engineering, with support for training, inference and evaluation.
 
+### Code to prevent Colab from stopping
+```
+function ConnectButton(){
+    console.log("Connect pushed"); 
+    document.querySelector("#top-toolbar > colab-connect-button").shadowRoot.querySelector("#connect").click() 
+}
+setInterval(ConnectButton,60000);
+```
+
 ## Installation (Colab)
 ### Clone
 ```
