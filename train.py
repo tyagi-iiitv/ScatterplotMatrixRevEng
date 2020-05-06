@@ -21,6 +21,7 @@ from torchvision import datasets
 from torchvision import transforms
 from torch.autograd import Variable
 import torch.optim as optim
+from google.colab import files
 
 
 if __name__ == "__main__":
@@ -179,4 +180,4 @@ if __name__ == "__main__":
             print(f"---- mAP {AP.mean()}")
 
         if (epoch+1) % opt.checkpoint_interval == 0:
-            torch.save(model.state_dict(), f"checkpoints/yolov3_ckpt_%d.pth" % (epoch+1))
+            torch.save(model.state_dict(), f"../drive/My Drive/4300_infographics/yolo_models/yolov3_ckpt_%d.pth" % (epoch+1))
